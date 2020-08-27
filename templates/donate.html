@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<!--
+	Projection by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>donate</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
+<style>
+      /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  z-index:2;
+  bottom: 0;
+  background-color: #fefefe !important;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #000342;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+  </style>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo"><strong>Help us</strong> by donating</a>
+					<nav id="nav">
+						<a href="{{url_for('home')}}">Home</a>
+						<a href="{{url_for('donate')}}">donate</a>
+						<a href="#" id="myBtn">edmodo</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal" style="z-index: 1">
+
+   <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close"><a href="{{url_for('home')}}">&times;</a></span>
+      <h2>Please enter your full name and Email</h2>
+    </div>
+    <form action="/" method="POST">
+    <div class="modal-body">
+      <p><input type="text" placeholder="Name" name="Name"></p>
+      <p><input type="text" placeholder="Email" name="Email"></p>
+      <p><button type="submit" class="btn">Sumbit</button></p>
+    </div>
+    </form>
+  </div>
+
+</div>
+
+</div>
+
+		<!-- Three -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Every Shekel Has An Effect</h2>
+						<p> To Which Program Would You Like To Donate  </p>
+					</header>
+				<div>
+          <input type="checkbox" id=" Desert Stars Leadership High School " name=" Desert Stars Leadership High School " value=" Desert Stars Leadership High School ">
+          <label for=" Desert Stars Leadership High School "> Desert Stars Leadership High School </label><br>
+          <input type="checkbox" id="Rawafed Empowerment Center" name="Rawafed Empowerment Center" value="Rawafed Empowerment Center">
+          <label for="Rawafed Empowerment Center"> Rawafed Empowerment Center </label><br>
+          <input type="checkbox" id=" Raidat Leadership Program for Women " name=" Raidat Leadership Program for Women " value=" Raidat Leadership Program for Women ">
+          <label for=" Raidat Leadership Program for Women "> Raidat Leadership Program for Women </label><br>
+          <input type="checkbox" id="Incubator for Leadership " name="Incubator for Leadership " value="Incubator for Leadership ">
+          <label for="Incubator for Leadership "> Incubator for Leadership  </label><br>
+          <input type="checkbox" id=" Desert Stars Alumni Program  " name=" Desert Stars Alumni Program  " value=" Desert Stars Alumni Program  ">
+          <label for=" Desert Stars Alumni Program  "> Desert Stars Alumni Program   </label><br>
+				</div> 
+          <script src="https://www.paypal.com/sdk/js?client-id=AekWPNyPg9YWOlcjeTsSXqCDRC2nd2yQi-235OoHF-WWtcQM8__03mVtY10cbRFJWng60rBcz-qTKd_v"></script>
+          <script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '0.01' } }] }); },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Transaction completed by ' + details.payer.name.given_name);
+        // Call your server to save the transaction
+        return fetch('/paypal-transaction-complete', {
+          method: 'post',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            orderID: data.orderID
+          })
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+
+            
+          <div id="paypal-button-container" style="z-index:0"></div>
+
+
+					<div class="image round right"{{url_for('static',filename='images/pic02.jpg')}}c="images/pic02.jpg" alt="Pic 02" />
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+
+					<h3>Get in touch</h3>
+
+					<form action="#" method="post">
+
+						<div class="field half first">
+							<label for="name">Name</label>
+							<input name="name" id="name" type="text" placeholder="Name">
+						</div>
+						<div class="field half">
+							<label for="email">Email</label>
+							<input name="email" id="email" type="email" placeholder="Email">
+						</div>
+						<div class="field">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
+						</div>
+						<ul class="actions">
+							<li><input value="Send Message" class="button alt" type="submit"></li>
+						</ul>
+					</form>
+
+					<div class="copyright">
+						&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+					</div>
+
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static',filename='js/skel.min.js')}}"></script>
+			<script src="{{url_for('static',filename='js/util.js')}}"></script>
+			<script src="{{url_for('static',filename='js/main.js')}}"></script>
+      <script>
+        // Get the modal
+var modal = document.getElementById("myModal");
+var welcomeing = document.getElementById("welcomeH1");
+var flex = document.getElementsByClassName("flex")[0];
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+  flex.style.display = "none";
+  welcomeing.style.display = "none";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  flex.style.display = "block";
+  welcomeing.style.display = "block";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+      </script>
+
+	</body>
+</html>
